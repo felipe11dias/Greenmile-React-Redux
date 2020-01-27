@@ -12,40 +12,12 @@ function Home(props) {
    const [name, setName] = useState('');
    const [msg, setMsg] = useState('');
 
-   const handleUserCredencials =  name => {
+   function handleUserCredencials(e, name) {
+      e.preventDefault();
       const { addToUserRequest } = props;
 
       addToUserRequest(name);
    }
-
-   // async function handleSubmit(e) {
-   //    e.preventDefault();
-   //    try {
-   //       const response = await api.get(`/users/${name}`);
-   //       setMsg("Nome/Apelido encontrado");
-   //    } catch (error) {
-   //       setMsg('Nome/Apelido não encontrado.');
-   //    }
-   // };
-
-   // Tentativa de utilizar redux para exportar dados do usuario encontrado para reducer(state global).
-
-   // async function handleSubmit(e) {
-   //    const { dispatch } = props;
-   //    var data = {};
-   //    e.preventDefault();
-   //    try {
-   //       const response = await api.get(`/users/${name}`);
-   //       data = response.data;
-   //    } catch (error) {
-   //       setMsg('Nome/Apelido não encontrado.');
-   //    }
-   //    console.log(data);
-   //    dispatch({
-   //       type: 'USER_CREDENCIALS',
-   //       user: data
-   //    });
-   // }
 
    return (
       <React.Fragment>
@@ -58,9 +30,11 @@ function Home(props) {
                      <div>
                         {msg && <p>{msg}</p>}
                      </div>
+                     <Form onSubmit={(e) => handleUserCredencials(e, name)}>
                         <label>Nome/Apelido</label><br/>
                         <input className="form-control" type="text" placeholder="Entre com seu nome ou apelido." value={name} onChange={ (e) => setName(e.target.value) }  /> <br/>
-                        <Button className="float-right" onClick={() => handleUserCredencials(name)}>Acessar</Button>
+                        <Button className="float-right" type="submit">Acessar</Button>
+                     </Form>
                   </Card.Body>
                </Card>
             </Col>

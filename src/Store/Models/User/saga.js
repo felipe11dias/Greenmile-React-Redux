@@ -1,22 +1,24 @@
 import api from '../../../Service/api';
 import { call, put, all, takeLatest } from 'redux-saga/effects';
 
-import { addToUserSuccess } from './actions';
+import { addToUserSuccess, addToUserFailed } from './actions';
 
 import history from '../../../Service/history';
 
 function* addToUser ({name}) {
-   console.log('saga before call');
-   
+   console.log('veio pelo user_request');
+
    try {
       const response = yield call(api.get, `/users/${name}`);
-      yield put(addToUserSuccess(response.data));
-      console.log('saga');
-      history.push('/user/profile');
-      window.location.reload();
+      //console.log(response.data);
+      const user = response.data;
+      //console.log(user);
+      yield put(addToUserSuccess(user));
+      // history.push('/user/profile');
+      // window.location.reload();
    } catch(error) {
-      console.log('error ' + error);
-      yield put(addToUserSuccess());
+      console.log(error);
+      yield put(addToUserFailed());
    }
 }
 

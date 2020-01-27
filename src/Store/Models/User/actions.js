@@ -15,7 +15,7 @@ export function addToUserRequest(name) {
 export function addToUserSuccess(user) {
    return {
       type: '@user/USER_SUCCESS',
-      user: user
+      user
    }
 }
 

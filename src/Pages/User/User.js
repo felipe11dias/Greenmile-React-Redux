@@ -1,12 +1,8 @@
 import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import store from '../../Store/index';
 
 function User ({ user }) {
-   console.log(store);
-   console.log(store.getState());
-
    return (
       <React.Fragment>
          <Row>
@@ -23,6 +19,6 @@ function User ({ user }) {
    );
 }
 
-export default connect(state => ({
-   user: state.user,
-}) )(User);
+const mapStateToProps = state => ({ user: state })
+
+export default connect(mapStateToProps, null)(User);
